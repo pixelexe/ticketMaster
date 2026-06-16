@@ -4,7 +4,9 @@ WORKDIR /app
 
 # Install dependencies
 COPY frontend/package*.json ./
-RUN npm ci
+# Use `npm install` to avoid failing on lockfile/package.json mismatches in CI
+# and allow installing despite peer-dep conflicts during development builds.
+RUN npm install --legacy-peer-deps
 
 # Copy source
 COPY frontend/ .
