@@ -82,3 +82,22 @@ cd contracts && forge test
 cd ../api && .venv/bin/python -m pytest
 cd ../frontend && npm run lint && npm run build
 ```
+
+## Docker (development)
+
+Quick Docker setup to run the API and the frontend together for development.
+
+1. Build and start the services:
+
+```bash
+docker compose up --build
+```
+
+2. Services:
+- API: http://localhost:8000
+- Frontend (Vite dev server): http://localhost:5173
+
+Notes:
+- The compose file mounts the local `api/` and `frontend/` folders into the containers so live edits are visible.
+- The API reads environment variables from a top-level `.env` file if present.
+- This setup runs the Vite dev server and Uvicorn with `--reload` for convenience during development.
